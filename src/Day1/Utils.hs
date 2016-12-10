@@ -4,22 +4,7 @@ module Day1.Utils where
 
 import Data.Bifunctor
 
-class (Enum a, Bounded a, Eq a) => Wrapped a where
-  succWrap :: a -> a
-  succWrap e
-    | e == maxBound = minBound
-    | otherwise     = succ e
-  predWrap :: a -> a
-  predWrap e
-    | e == minBound = maxBound
-    | otherwise     = pred e
-
-class Cmd a where
-  cmd :: (Wrapped b) => a -> (b -> b)
-
 data Dir = N | E | S | W deriving (Enum, Show, Bounded, Eq)
-
-instance Wrapped Dir
 
 data Instr = L Int | R Int
 
@@ -32,13 +17,13 @@ magnitude :: Instr -> Int
 magnitude (L i) = i
 magnitude (R i) = i
 
-turnLeft, turnRight :: Wrapped a => a -> a
-turnLeft = predWrap
-turnRight = succWrap
-
-instance Cmd Instr where
-  cmd (L _) = turnLeft
-  cmd (R _) = turnRight
+cmd :: Instr -> Dir -> Dir
+cmd (L _) e
+  | e == maxBound = minBound
+  | otherwise     = succ e
+cmd (R _) e
+  | e == minBound = maxBound
+  | otherwise     = pred e
 
 type Coords = (Int, Int)
 
