@@ -23,9 +23,18 @@ library
                      , Day1Day2.Day2.Part1
                      , Day1Day2.Day2.Part2
                      , Day1Day2.Day2.Utils
+                     , Day3.Part1
+                     , Day3.Part2
+                     , Day3.Utils
   build-depends:       base >= 4.7 && < 5
+                     , bytestring
+                     , conduit
+                     , conduit-combinators
+                     , conduit-extra
                      , containers
+                     , resourcet
                      , split
+                     , text
   default-language:    Haskell2010
 
 executable AdventOfCode2016-exe
