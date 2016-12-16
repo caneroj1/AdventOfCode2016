@@ -3,6 +3,7 @@ module Day3.Part2
   solve
 ) where
 
+import AdventUtils
 import Control.Monad
 import Control.Monad.Trans.Resource
 import Data.Conduit
@@ -17,10 +18,9 @@ import Day3.Utils
 
 solve :: IO ()
 solve =
-  print =<< runConduitRes (source =$= sendPacket =$= handleTrianglePacket)
-
-source :: Producer (ResourceT IO) Text
-source = CB.sourceFile "input/day3/in.txt" =$= CB.lines =$= CT.decodeUtf8
+  print =<<
+    runConduitRes (textSourceL file =$= sendPacket =$= handleTrianglePacket)
+  where file = "input/day3/in.txt"
 
 data Packet = Packet Text Text Text
 
