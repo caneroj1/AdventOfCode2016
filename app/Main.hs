@@ -1,6 +1,6 @@
 module Main where
 
-import Lib
+import Day1Day2.Day2.Part2
 
 main :: IO ()
-main = putStrLn "Nothing yet!"
+main = solve

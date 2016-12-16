@@ -16,9 +16,13 @@ cabal-version:       >=1.10
 library
   hs-source-dirs:      src
   exposed-modules:     Lib
-                     , Day1.Part1
-                     , Day1.Part2
-                     , Day1.Utils
+                     , Day1Day2.Common
+                     , Day1Day2.Day1.Part1
+                     , Day1Day2.Day1.Part2
+                     , Day1Day2.Day1.Utils
+                     , Day1Day2.Day2.Part1
+                     , Day1Day2.Day2.Part2
+                     , Day1Day2.Day2.Utils
   build-depends:       base >= 4.7 && < 5
                      , containers
                      , split
