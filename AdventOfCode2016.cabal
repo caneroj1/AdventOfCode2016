@@ -30,12 +30,17 @@ library
                      , Day4.Part1
                      , Day4.Part2
                      , Day4.Utils
+                     , Day5.Part1
+                     , Day5.Part2
+                     , Day5.Utils
   build-depends:       base >= 4.7 && < 5
                      , bytestring
                      , conduit
                      , conduit-combinators
                      , conduit-extra
                      , containers
+                     , cryptohash
+                     , hex
                      , parsec
                      , resourcet
                      , split
