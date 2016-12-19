@@ -33,6 +33,9 @@ library
                      , Day5.Part1
                      , Day5.Part2
                      , Day5.Utils
+                     , Day6.Part1
+                     , Day6.Part2
+                     , Day6.Utils
   build-depends:       base >= 4.7 && < 5
                      , bytestring
                      , conduit
@@ -41,11 +44,13 @@ library
                      , containers
                      , cryptohash
                      , hex
+                     , mtl
                      , parsec
                      , resourcet
                      , split
                      , text
                      , unordered-containers
+                     , vector
   default-language:    Haskell2010
 
 executable AdventOfCode2016-exe
