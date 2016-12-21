@@ -37,6 +37,7 @@ library
                      , Day6.Part2
                      , Day6.Utils
                      , Day7.Part1
+                     , Day7.Part2
                      , Day7.Utils
   build-depends:       base >= 4.7 && < 5
                      , bytestring
@@ -45,6 +46,7 @@ library
                      , conduit-extra
                      , containers
                      , cryptohash
+                     , hashable
                      , hex
                      , mtl
                      , parsec
