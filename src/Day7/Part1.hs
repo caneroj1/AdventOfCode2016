@@ -1,6 +1,3 @@
-{-# LANGUAGE GADTs #-}
-{-# LANGUAGE FlexibleContexts #-}
-
 module Day7.Part1 where
 
 import Data.Conduit
