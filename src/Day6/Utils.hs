@@ -22,6 +22,8 @@ newtype CountPerCol = CPC {
     countPerCol :: Vector CharMap
   } deriving (Show)
 
+type CountM = StateT CountPerCol IO
+
 initial :: CountPerCol
 initial = CPC $ V.replicate 8 M.empty
 
@@ -41,9 +43,9 @@ solveWithMethod method =
             runConduitRes $
               textSourceL "input/day6/in.txt" =$= updateColumnCounts)
 
-updateColumnCounts :: Consumer Text (ResourceT (StateT CountPerCol IO)) ()
+updateColumnCounts :: Consumer Text (ResourceT CountM) ()
 updateColumnCounts = CC.mapM_ doUpdate
   where
-    doUpdate :: Text -> ResourceT (StateT CountPerCol IO) ()
+    doUpdate :: Text -> ResourceT CountM ()
     doUpdate t =
       modify' (updateCountPerCol . zip [0..] $ unpack t)
