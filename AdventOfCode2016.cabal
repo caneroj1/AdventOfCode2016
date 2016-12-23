@@ -39,7 +39,10 @@ library
                      , Day7.Part1
                      , Day7.Part2
                      , Day7.Utils
-                     , Day8.Part1
+                     , Day8.Lens
+                     , Day8.Parser
+                     , Day8.Solution
+                     , Day8.Types
                      , Day8.Utils
   build-depends:       base >= 4.7 && < 5
                      , bytestring
@@ -51,6 +54,7 @@ library
                      , hashable
                      , hex
                      , lens
+                     , mmorph
                      , mtl
                      , parsec
                      , resourcet
