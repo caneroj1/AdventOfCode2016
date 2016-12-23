@@ -40,6 +40,7 @@ library
                      , Day7.Part2
                      , Day7.Utils
                      , Day8.Part1
+                     , Day8.Utils
   build-depends:       base >= 4.7 && < 5
                      , bytestring
                      , conduit

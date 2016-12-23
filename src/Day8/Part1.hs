@@ -1,17 +1,20 @@
 {-# LANGUAGE FlexibleContexts #-}
-{-# LANGUAGE Rank2Types #-}
 
 module Day8.Part1 where
 
-import Control.Lens hiding (at)
+import Control.Lens
 import Control.Monad
 import Control.Monad.State
 import Data.List
 import Data.Vector (Vector, (//))
 import Data.Vector.Lens
-import qualified Data.Vector as V hiding (Vector)
+import qualified Data.Vector as V hiding (Vector, (//))
+import Day8.Utils
 
-data Pixel = On | Off
+data Pixel = Off | On deriving Enum
+
+isLit :: Pixel -> Bool
+isLit = toEnum . fromEnum
 
 instance Show Pixel where
   show On = "#"
@@ -29,9 +32,6 @@ newtype Matrix = M {
 instance Show Matrix where
   show (M vv) = intercalate "\n" . map show $ V.toList vv
 
-at :: Int -> Lens' (Vector a) (Vector a)
-at i = sliced i 1
-
 trans :: Iso' (Vector (Vector a)) (Vector (Vector a))
 trans = iso vl vl
   where lv = V.fromList . map V.fromList
@@ -46,14 +46,18 @@ matrix :: Iso' Matrix (Vector (Vector Pixel))
 matrix = iso fromMatrix M
 
 setRect :: Int -> Int -> Vector (Vector Pixel) -> Vector (Vector Pixel)
-setRect r c vv = vv // zip [0..(r-1)] (repeat v')
-  where v' = V.replicate l Off & sliced 0 c . mapped .~ On
-        l  = V.length $ V.head vv
+setRect r c = V.imap turnOnRow
+  where turnOnRow idx v
+          | idx < r   = v & sliced 0 c . mapped .~ On
+          | otherwise = v
 
 initial :: Int -> Int -> Matrix
 initial r c = M $ V.replicate r (V.replicate c Off)
 
 exec :: (MonadState Matrix m) => Action -> m ()
-exec (Row i n)  = modify' $ over (matrix . at i) (shiftR n)
-exec (Col i n)  = modify' $ over (matrix . trans . at i) (shiftR n)
-exec (Rect c r) = modify' $ over matrix (setRect r c)
+exec (Row i n)  = modify' $ matrix . ix i %~ shiftR n
+exec (Col i n)  = modify' $ matrix . trans . ix i %~ shiftR n
+exec (Rect c r) = modify' $ matrix %~ setRect r c
+
+lit :: Matrix -> Int
+lit = V.foldl' (\s v -> s + V.length (V.filter isLit v)) 0 . fromMatrix
