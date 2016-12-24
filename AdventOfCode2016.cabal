@@ -15,8 +15,7 @@ cabal-version:       >=1.10
 
 library
   hs-source-dirs:      src
-  exposed-modules:     Lib
-                     , AdventUtils
+  exposed-modules:     AdventUtils
                      , Day1Day2.Common
                      , Day1Day2.Day1.Part1
                      , Day1Day2.Day1.Part2
@@ -44,6 +43,8 @@ library
                      , Day8.Solution
                      , Day8.Types
                      , Day8.Utils
+                     , Day9.Part1
+                     , Day9.Part2
   build-depends:       base >= 4.7 && < 5
                      , bytestring
                      , conduit
